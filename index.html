@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Conversation Generator</title>
+    
+    <style>
+        @font-face {
+            font-family: 'Computer Says No';
+            src: url('computer-says-no%20%281%29.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body { 
+            font-family: 'Computer Says No', sans-serif; 
+            padding: 20px; 
+            max-width: 800px; 
+            margin: auto; 
+            background-color: #f9f9f9; 
+        }
+
+        h1, h2, h3 {
+            font-family: inherit;
+            color: #d5567e;
+            margin-bottom: 20px;
+        }
+
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        
+        input[type="text"], input[type="date"], input[type="time"], select { 
+            width: 100%; 
+            padding: 6px 8px; 
+            box-sizing: border-box; 
+            border: 1px solid #b8b8b8; 
+            border-radius: 3px; 
+            margin-bottom: 5px; 
+            font-family: inherit;
+            font-size: 16px;
+        }
+
+        select {
+            height: 36px;
+            line-height: 1.2;
+            font-size: 14px;
+            padding: 2px 4px;
+        }
+
+        #programSelect {
+            font-size: 14px;
+        }
+        
+        .other-input { display: none; margin-top: 5px; }
+        
+        button { 
+            background-color: #d5567e; 
+            color: white; 
+            border: none; 
+            padding: 10px 15px; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 16px; 
+            margin-top: 10px; 
+            font-family: inherit;
+        }
+        
+        button:hover { background-color: #bd4668; }
+        
+        textarea { 
+            width: 100%; 
+            height: 300px; 
+            padding: 10px; 
+            margin-top: 20px; 
+            box-sizing: border-box; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+            font-family: inherit; 
+            font-size: 16px;
+            resize: vertical; 
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Community Conversation #1 Generator</h2>
+
+    <div class="form-group">
+        <label for="convoDate">Date:</label>
+        <input type="date" id="convoDate">
+    </div>
+
+    <div class="form-group">
+        <label for="convoTime">Time:</label>
+        <input type="time" id="convoTime">
+    </div>
+
+    <div class="form-group">
+        <label for="studentSelect">Select Student:</label>
+        <select id="studentSelect">
+            <option value="">-- Choose a Student --</option>
+            <option value="Aanya">Aanya</option>
+            <option value="Alwande">Alwande</option>
+            <option value="Alyssa">Alyssa</option>
+            <option value="Celeste">Celeste</option>
+            <option value="Charlotte">Charlotte</option>
+            <option value="Eshal">Eshal</option>
+            <option value="Gabriella">Gabriella</option>
+            <option value="Gaudy">Gaudy</option>
+            <option value="Greta">Greta</option>
+            <option value="Heba">Heba</option>
+            <option value="Inaaya">Inaaya</option>
+            <option value="Jocelyn">Jocelyn</option>
+            <option value="Kylie">Kylie</option>
+            <option value="Maria">Maria</option>
+            <option value="Muhaddisa">Muhaddisa</option>
+            <option value="Myra">Myra</option>
+            <option value="Nina">Nina</option>
+            <option value="Samanta">Samanta</option>
+            <option value="Sofia">Sofia</option>
+            <option value="Sophie">Sophie</option>
+            <option value="Sowmya">Sowmya</option>
+            <option value="Tianna">Tianna</option>
+            <option value="Umaama">Umaama</option>
+            <option value="Vanessa">Vanessa</option>
+            <option value="Veda">Veda</option>
+            <option value="Victoria">Victoria</option>
+            <option value="Zariah">Zariah</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="programSelect">1. Program:</label>
+        <select id="programSelect" onchange="toggleOther('programSelect', 'programOther')">
+            <option value="">-- Choose a Program --</option>
+            <option value="Arts & Science I">Arts & Science I</option>
+            <option value="Bachelor of Technology I">Bachelor of Technology I</option>
+            <option value="Business I">Business I</option>
+            <option value="Chemical and Physical Sciences Gateway">Chemical and Physical Sciences Gateway</option>
+            <option value="Computer Science I">Computer Science I</option>
+            <option value="Engineering I">Engineering I</option>
+            <option value="Environmental and Earth Sciences Gateway">Environmental and Earth Sciences Gateway</option>
+            <option value="Health Sciences I">Health Sciences I</option>
+            <option value="Honours Integrated Science">Honours Integrated Science</option>
+            <option value="Honours Kinesiology">Honours Kinesiology</option>
+            <option value="Humanities I">Humanities I</option>
+            <option value="Integrated Biomedical Engineering & Health Sciences (iBioMed) I">Integrated Biomedical Engineering & Health Sciences (iBioMed) I</option>
+            <option value="Life Sciences Gateway">Life Sciences Gateway</option>
+            <option value="Mathematics and Statistics Gateway">Mathematics and Statistics Gateway</option>
+            <option value="Medical Radiation Sciences">Medical Radiation Sciences</option>
+            <option value="Midwifery I">Midwifery I</option>
+            <option value="Music I">Music I</option>
+            <option value="Nursing I">Nursing I</option>
+            <option value="Social Sciences I">Social Sciences I</option>
+            <option value="Studio Art I">Studio Art I</option>
+            <option value="Other">Other (Type below)</option>
+        </select>
+        <input type="text" id="programOther" class="other-input" placeholder="Enter custom program">
+    </div>
+
+    <div class="form-group">
+        <label for="hometownSelect">2. Hometown:</label>
+        <select id="hometownSelect" onchange="toggleOther('hometownSelect', 'hometownOther')">
+            <option value="">-- Choose a Hometown --</option>
+            <option value="Toronto, Ontario">Toronto</option>
+            <option value="Mississauga, Ontario">Mississauga</option>
+            <option value="Brampton, Ontario">Brampton</option>
+            <option value="Hamilton, Ontario">Hamilton</option>
+            <option value="Ottawa, Ontario">Ottawa</option>
+            <option value="Markham, Ontario">Markham</option>
+            <option value="Vaughan, Ontario">Vaughan</option>
+            <option value="Kitchener, Ontario">Kitchener</option>
+            <option value="London, Ontario">London</option>
+            <option value="Richmond Hill, Ontario">Richmond Hill</option>
+            <option value="Burlington, Ontario">Burlington</option>
+            <option value="Oakville, Ontario">Oakville</option>
+            <option value="Barrie, Ontario">Barrie</option>
+            <option value="Other">Other (Type below)</option>
+        </select>
+        <input type="text" id="hometownOther" class="other-input" placeholder="Enter custom hometown">
+    </div>
+
+    <div class="form-group">
+        <label for="hobbies">3. Hobbies & Interests:</label>
+        <input type="text" id="hobbies" placeholder="e.g., playing soccer and reading">
+    </div>
+
+    <div class="form-group">
+        <label for="clubs">4. Clubs Planning to Join:</label>
+        <input type="text" id="clubs" placeholder="e.g., McMaster Astronomy Club">
+    </div>
+
+    <div class="form-group">
+        <label for="foodSpot">5. Go-To Food Spot on Campus:</label>
+        <input type="text" id="foodSpot" placeholder="e.g., Centro">
+    </div>
+
+    <div class="form-group">
+        <label for="firstWeeks">6. How the first couple weeks have gone (How they've felt):</label>
+        <input type="text" id="firstWeeks" placeholder="e.g., busy but exciting">
+    </div>
+
+    <div class="form-group">
+        <label for="feelings">7. What they're excited for (Feelings about remainder of year):</label>
+        <input type="text" id="feelings" placeholder="e.g., joining a study group and intramurals">
+    </div>
+
+    <button onclick="generateLog()">Generate Conversation Notes</button>
+
+    <textarea id="output" readonly placeholder="Your formatted text will appear here..."></textarea>
+
+    <script>
+        const studentDatabase = {
+            "Kylie": { lastName: "FONG", roomNumber: "01A" },
+            "Charlotte": { lastName: "COUTTS", roomNumber: "01B" },
+            "Gaudy": { lastName: "OMONDI", roomNumber: "02A" },
+            "Veda": { lastName: "CUNNIFFE", roomNumber: "04A" },
+            "Sofia": { lastName: "GLAVCE", roomNumber: "06A" },
+            "Victoria": { lastName: "ALEINIKOV", roomNumber: "06B" },
+            "Jocelyn": { lastName: "ROODE", roomNumber: "07A" },
+            "Nina": { lastName: "JOANNOU", roomNumber: "09A" },
+            "Umaama": { lastName: "FAROOQ", roomNumber: "10A" },
+            "Celeste": { lastName: "RIOUX", roomNumber: "11A" },
+            "Vanessa": { lastName: "SU", roomNumber: "11B" },
+            "Sophie": { lastName: "JONES", roomNumber: "12A" },
+            "Zariah": { lastName: "LENNON", roomNumber: "13A" },
+            "Eshal": { lastName: "HADIBHAI", roomNumber: "14A" },
+            "Alyssa": { lastName: "WHEELER", roomNumber: "14B" },
+            "Samanta": { lastName: "TABASSUM", roomNumber: "17A" },
+            "Gabriella": { lastName: "D'ONOFRIO", roomNumber: "17B" },
+            "Muhaddisa": { lastName: "FATIMA", roomNumber: "18A" },
+            "Sowmya": { lastName: "VAKKAVANTHULA", roomNumber: "18B" },
+            "Tianna": { lastName: "HEATH", roomNumber: "19A" },
+            "Myra": { lastName: "JIN", roomNumber: "19B" },
+            "Heba": { lastName: "JAWAID", roomNumber: "20A" },
+            "Inaaya": { lastName: "MALIK", roomNumber: "20B" },
+            "Aanya": { lastName: "SALAM", roomNumber: "21A" },
+            "Alwande": { lastName: "ORENISI", roomNumber: "21B" },
+            "Maria": { lastName: "GUDINE", roomNumber: "22A" },
+            "Greta": { lastName: "HARDER", roomNumber: "22B" }
+        };
+
+        function toggleOther(selectId, otherId) {
+            const selectEl = document.getElementById(selectId);
+            const otherEl = document.getElementById(otherId);
+            if (selectEl.value === "Other") {
+                otherEl.style.display = "block";
+            } else {
+                otherEl.style.display = "none";
+                otherEl.value = ""; 
+            }
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return "[Date]";
+            const options = { month: 'long', day: 'numeric', year: 'numeric' };
+            const date = new Date(dateString + 'T00:00:00');
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        function formatTime(timeString) {
+            if (!timeString) return "[Time]";
+            let [hours, minutes] = timeString.split(':');
+            let ampm = hours >= 12 ? 'pm' : 'am';
+            hours = hours % 12;
+            hours = hours ? hours : 12;
+            return `${hours}:${minutes}${ampm}`;
+        }
+
+        function getSelectOrOther(selectId, otherId, fallback) {
+            const selectVal = document.getElementById(selectId).value;
+            if (selectVal === "Other") {
+                return document.getElementById(otherId).value || fallback;
+            }
+            return selectVal || fallback;
+        }
+
+        function generateLog() {
+            const dateInput = document.getElementById('convoDate').value;
+            const timeInput = document.getElementById('convoTime').value;
+            const firstName = document.getElementById('studentSelect').value;
+            
+            const program = getSelectOrOther('programSelect', 'programOther', "[Insert Program]");
+            const hometown = getSelectOrOther('hometownSelect', 'hometownOther', "[Insert Hometown]");
+            const hobbies = document.getElementById('hobbies').value || "[Insert Hobbies]";
+            const clubs = document.getElementById('clubs').value || "[Insert Clubs]";
+            const foodSpot = document.getElementById('foodSpot').value || "[Insert Food Spot]";
+            const firstWeeks = document.getElementById('firstWeeks').value || "[Insert description]";
+            const feelings = document.getElementById('feelings').value || "[Insert what they are excited for]";
+
+            if (!firstName) {
+                alert("Please select a student first.");
+                return;
+            }
+
+            const studentData = studentDatabase[firstName];
+            const lastName = studentData.lastName;
+            const room = studentData.roomNumber;
+            const formattedDate = formatDate(dateInput);
+            const formattedTime = formatTime(timeInput);
+
+            const generatedText = 
+`On ${formattedDate} at or around ${formattedTime} LENNON, Zariah (Community Advisor) met with ${lastName}, ${firstName} (Wallingford, #3${room}) in the Tea Room for Community Conversation #1. 
+
+${lastName} shared the following with LENNON:
+
+- ${lastName} is currently enrolled in the ${program} program.
+- ${lastName} is originally from the hometown of ${hometown}.
+- ${lastName} expressed interest in hobbies such as ${hobbies}.
+- ${lastName} is planning to join clubs such as ${clubs}.
+- ${lastName} prefers visiting ${foodSpot} as a go-to food spot on campus.
+- ${lastName} described the first couple of weeks on campus as ${firstWeeks}.
+- ${lastName} is excited for ${feelings} regarding the remainder of the academic year.`;
+
+            document.getElementById('output').value = generatedText;
+        }
+    </script>
+
+</body>
+</html>
